@@ -44,7 +44,11 @@ export class App extends React.Component<any, any> {
     const host = "/api/movies"
     this.searchkit = new SearchkitManager(host)
     this.searchkit.translateFunction = (key)=> {
-      return {"pagination.next":"Next Page", "pagination.previous":"Previous Page"}[key]
+      return {
+        "pagination.next":"Следующая",
+        "pagination.previous":"Предыдущая",
+        "searchbox.placeholder":"наберите не меньше трех знаков, чтобы начать поиск"
+      }[key]
     }
   }
 
