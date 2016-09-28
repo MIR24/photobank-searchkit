@@ -47,7 +47,11 @@ export class App extends React.Component<any, any> {
       return {
         "pagination.next":"Следующая",
         "pagination.previous":"Предыдущая",
-        "searchbox.placeholder":"наберите не меньше трех знаков, чтобы начать поиск"
+        "searchbox.placeholder":"наберите не меньше трех знаков, чтобы начать поиск",
+        "hitstats.results_found":"{hitCount} найдено",
+        "facets.view_more":"Показать больше",
+        "facets.view_all":"Показать все",
+        "facets.view_less":"Показать меньше"
       }[key]
     }
   }
@@ -59,7 +63,7 @@ export class App extends React.Component<any, any> {
       <SearchkitProvider searchkit={this.searchkit}>
         <Layout>
           <TopBar>
-            <div className="my-logo">MIR24 photobank</div>
+            <div className="my-logo">МИР24 фотобанк</div>
             <SearchBox
               translations={{"searchbox.placeholder":"type at least 3 characters for image search"}}
               queryOptions={{"minimum_should_match":"70%"}}
@@ -73,9 +77,9 @@ export class App extends React.Component<any, any> {
       			<SideBar>
       				<HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Image Length" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Image Width" showHistogram={true}/>
-              <RefinementListFilter operator="OR" id="author" title="Author" field="author.raw" size={10}/>
+              <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
+              <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
       				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
       				<RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
               <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
@@ -96,11 +100,6 @@ export class App extends React.Component<any, any> {
                   }}/>
 		  <PageSizeSelector options={[4,12,24]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
-          				<SortingSelector options={[
-          					{label:"Relevance", field:"_score", order:"desc",defaultOption:true},
-          					{label:"Latest Releases", field:"released", order:"desc"},
-          					{label:"Earliest Releases", field:"released", order:"asc"}
-          				]}/>
                 </ActionBarRow>
                 <ActionBarRow>
                   <SelectedFilters/>
@@ -113,8 +112,8 @@ export class App extends React.Component<any, any> {
       				    hitsPerPage={12} highlightFields={["title","plot"]}
                   sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename"]}
                   hitComponents = {[
-                    {key:"grid", title:"Grid", itemComponent:MovieHitsGridItem, defaultOption:true},
-                    {key:"list", title:"List", itemComponent:MovieHitsListItem}
+                    {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
+                    {key:"list", title:"Список", itemComponent:MovieHitsListItem}
                   ]}
                   scrollTo="body"
               />
