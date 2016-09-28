@@ -53,7 +53,7 @@ export class App extends React.Component<any, any> {
 
     return (
       <SearchkitProvider searchkit={this.searchkit}>
-        <Layout size="l">
+        <Layout>
           <TopBar>
             <div className="my-logo">MIR24 photobank</div>
             <SearchBox
