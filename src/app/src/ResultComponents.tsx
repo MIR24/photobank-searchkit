@@ -21,8 +21,7 @@ export const MovieHitsGridItem = (props)=> {
 
     <Popover id="popover-trigger-hover-focuse" title="Meta Data" className="bt3-no-border">
       <ListGroup>
-        <ListGroupItem  header="Title" href="#">{source.title}</ListGroupItem>
-        <ListGroupItem  header="Plot"  href="#">{source.plot}</ListGroupItem>
+        <ListGroupItem  header="Author" href="#">{source.author}</ListGroupItem>
       </ListGroup>
     </Popover>
 
@@ -76,8 +75,7 @@ export const MovieHitsListItem = (props)=> {
 
     <Popover id="popover-trigger-hover-focus" title="Meta Data" className="bt3-no-border">
       <ListGroup>
-        <ListGroupItem  header="Title" href="#">{source.title}</ListGroupItem>
-        <ListGroupItem  header="Plot"  href="#">{source.plot}</ListGroupItem>
+        <ListGroupItem  header="Author" href="#">{source.author}</ListGroupItem>
       </ListGroup>
     </Popover>
 
