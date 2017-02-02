@@ -6,6 +6,7 @@ const Tooltip = require("react-bootstrap/lib/Tooltip");
 const Overlay = require("react-bootstrap/lib/Overlay");
 const bootstrapUtils = require("react-bootstrap/lib/utils/bootstrapUtils");
 bootstrapUtils.addStyle(Button, 'overlay');
+bootstrapUtils.addStyle(Button, 'overlay-list');
 import * as ReactDOM from "react-dom";
 
 export var list = [];
@@ -18,7 +19,16 @@ export const MovieHitsGridItem = (props)=> {
 
   const Example = React.createClass({
     getInitialState() {
-      return { show: false };
+      var isInArray = false;
+
+      list.map(
+        function(name, index){
+          if(name == source.poster){
+            isInArray = true;
+          }
+        })
+
+      return { show: isInArray };
     },
 
     toggle() {
@@ -80,11 +90,69 @@ export const MovieHitsListItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "http://www.imdb.com/title/" + result._source.imdbId
   const source:any = _.extend({}, result._source, result.highlight)
+
+  const Example = React.createClass({
+    getInitialState() {
+
+    var isInArray = false;
+
+    list.map(
+      function(name, index){
+        if(name == source.poster){
+          isInArray = true;
+        }
+      })
+
+      return { show: isInArray };
+    },
+
+    toggle() {
+
+      if (!this.state.show){
+        list.push(source.poster);
+      }
+      else
+      {
+        list.map(
+          function(name, index){
+            if(name == source.poster){
+              list.splice(index,1);
+            }
+          })
+      }
+
+      this.setState({ show: !this.state.show });
+    },
+
+    render() {
+      const sharedProps = {
+        show: this.state.show,
+        container: this,
+        target: () => ReactDOM.findDOMNode(this.refs.target)
+      };
+
+      return (
+        <div style={{ position: 'relative' }}>
+
+              <Button bsStyle="overlay-list" ref="target" onClick={ this.toggle }>
+                <div className={bemBlocks.item("poster")}>
+                  <img data-qa="poster" src={result._source.poster}/>
+                </div>
+
+              </Button>
+
+          <Overlay {...sharedProps} placement="top">
+            <Tooltip id="overload-top">✔ Selected</Tooltip>
+          </Overlay>
+
+        </div>
+      );
+    }
+  });
+
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-      <div className={bemBlocks.item("poster")}>
-        <img data-qa="poster" src={result._source.poster}/>
-      </div>
+      <Example />
       <div className={bemBlocks.item("details")}>
         <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></h2></a>
         <h3 className={bemBlocks.item("subtitle")}>Released in {source.year}, rated {source.imdbRating}/10</h3>
