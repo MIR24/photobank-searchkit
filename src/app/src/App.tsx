@@ -33,7 +33,8 @@ import "./../styles/customisations.scss";
 import "searchkit/theming/theme.scss";
 
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
-
+const Button = require('react-bootstrap/lib/Button');
+const listObj = require("./ResultComponents")
 
 export class App extends React.Component<any, any> {
 
@@ -107,6 +108,11 @@ export class App extends React.Component<any, any> {
                 </ActionBarRow>
 
               </ActionBar>
+
+
+              <div id="additional-buttons">
+                <Button onClick={(e)=>{console.log(listObj.list)}}>Send Selected</Button>
+              </div>
 
               <ViewSwitcherHits
       				    hitsPerPage={12} highlightFields={["title","plot"]}
