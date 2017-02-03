@@ -47,3 +47,29 @@
 .layout__crime-app {
 
 }
+
+.div-title{
+  margin-left: 20px;
+  top: -20px;
+  color: #08c;
+  font: 15px Helvetica, Sans-Serif;
+  position: relative;
+  width: 240px;
+  height: auto;
+  align-items: center;
+  align-content: center;
+
+}
+
+.div-img-overlay{
+  color: white;
+  font: bold 15px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+  background: rgb(0, 0, 0); /* fallback color */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  position: relative;
+  width: 240px;
+  top: -50px;
+  pointer-events: none;
+}

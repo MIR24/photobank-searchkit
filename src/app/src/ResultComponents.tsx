@@ -10,7 +10,8 @@ export const MovieHitsGridItem = (props)=> {
       <a href={url} onClick={(e)=>{e.preventDefault(); console.log("195.26.178.77/plugins/imageviewer/site/direct.php?s="+result._source.imdbId)}}>
         <div >
           <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster} width="240" height="240"/>
-          <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}>
+          <div className="div-img-overlay" dangerouslySetInnerHTML={{__html:source.author}}></div>
+          <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
           </div>
         </div>
       </a>
