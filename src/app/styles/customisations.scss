@@ -49,7 +49,6 @@
 }
 
 .div-title{
-  top: -30px;
   margin-bottom: -30px;
   color: #08c;
   font: 15px Helvetica, Sans-Serif;
@@ -72,4 +71,31 @@
   width: 240px;
   top: -50px;
   pointer-events: none;
+}
+
+.container{
+  display: table;
+}
+
+.container .image-container {
+  width: 240px;
+  height: 240px;
+    text-align: center;
+    vertical-align: bottom;
+    display: table-cell;
+}
+
+.container .image-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.container .image-container p {
+  z-index: 100;
+  position: relative;
+  color: #08c;
+  font: bold 17px Helvetica, Sans-Serif;
+  background: rgb(0,0,0); /* fallback color */
+  background: rgba(255,255,255, 0.7);
+  top: -60px;
 }
