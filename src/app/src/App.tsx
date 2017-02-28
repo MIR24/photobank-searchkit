@@ -79,7 +79,7 @@ export class App extends React.Component<any, any> {
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
-              <NumericRefinementListFilter id="runtimeMinutes1" title="Маленькие/Большие" field="sizetype" options={[
+              <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
                 {title:"Все"},
                 {title:"Маленькие", from:0, to:1500},
                 {title:"Большие", from:1500, to:9000}
