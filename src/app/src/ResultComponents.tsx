@@ -6,15 +6,13 @@ export const MovieHitsGridItem = (props)=> {
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
-  let posOfLastForwardSlash = result._source.poster.lastIndexOf( "/" );
-  let newImgUrl = result._source.poster.substring(0, posOfLastForwardSlash)+"/585x440_cropped.jpg";
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} onClick={(e)=>{e.preventDefault(); console.log("195.26.178.77/plugins/imageviewer/site/direct.php?s="+result._source.imdbId)}}>
         <div >
           <div className="container">
             <div className="image-container">
-              <img data-qa="poster" className={bemBlocks.item("poster")} src={newImgUrl}/>
+              <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
               <div className="image-info">{imgInfo}</div>
               <div className="image-info">{result._source.date_taken}</div>
             </div>
@@ -31,12 +29,10 @@ export const MovieHitsListItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "http://www.imdb.com/title/" + result._source.imdbId
   const source:any = _.extend({}, result._source, result.highlight)
-  let posOfLastForwardSlash = result._source.poster.lastIndexOf( "/" );
-  let newImgUrl = result._source.poster.substring(0, posOfLastForwardSlash)+"/585x440_cropped.jpg";
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <div className={bemBlocks.item("poster")}>
-        <img data-qa="poster" src={newImgUrl}/>
+        <img data-qa="poster" src={result._source.poster}/>
       </div>
       <div className={bemBlocks.item("details")}>
         <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></h2></a>
