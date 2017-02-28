@@ -16,6 +16,7 @@ export const MovieHitsGridItem = (props)=> {
             <div className="image-container">
               <img data-qa="poster" className={bemBlocks.item("poster")} src={newImgUrl}/>
               <div className="image-info">{imgInfo}</div>
+              <div className="image-info">{result._source.date_taken}</div>
             </div>
           </div>
           <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
