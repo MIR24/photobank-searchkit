@@ -79,6 +79,16 @@ export class App extends React.Component<any, any> {
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
+                {title:"Все"},
+                {title:"Маленькие", from:0, to:1500},
+                {title:"Большие", from:1500, to:9000}
+              ]}/>
+              <NumericRefinementListFilter id="alignment" title="Вертикальные/Горизонтальные" field="horizontal" options={[
+                {title:"Все"},
+                {title:"Вертикальные", from:0, to:1},
+                {title:"Горизонтальные", from:1, to:2}
+              ]}/>
               <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
       				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
       				<RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
@@ -110,7 +120,9 @@ export class App extends React.Component<any, any> {
 
               <ViewSwitcherHits
       				    hitsPerPage={12} highlightFields={["title","plot"]}
-                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename", "exifimagelength", "exifimagewidth"]}
+
+                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename","exifimagelength", "exifimagewidth", "date_taken"]}
+
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
                     {key:"list", title:"Список", itemComponent:MovieHitsListItem}
