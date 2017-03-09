@@ -51,7 +51,8 @@ export class App extends React.Component<any, any> {
         "hitstats.results_found":"{hitCount} найдено",
         "facets.view_more":"Показать больше",
         "facets.view_all":"Показать все",
-        "facets.view_less":"Показать меньше"
+        "facets.view_less":"Показать меньше",
+        "reset.clear_all":"Сбросить фильтры"
       }[key]
     }
   }
