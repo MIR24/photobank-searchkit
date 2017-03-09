@@ -41,7 +41,7 @@ export class App extends React.Component<any, any> {
 
   constructor() {
     super()
-    const host = "http://172.17.0.3:9200/movies"
+    const host = "/api/movies"
     this.searchkit = new SearchkitManager(host)
     this.searchkit.translateFunction = (key)=> {
       return {
