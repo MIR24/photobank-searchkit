@@ -77,8 +77,8 @@ export class App extends React.Component<any, any> {
       			<SideBar>
       				<HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <RangeFilter min={500} max={6000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
+              <RangeFilter min={500} max={6000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
               <NumericRefinementListFilter id="smallBig" title="Размер" field="sizetype" options={[
                 {title:"Все"},
                 {title:"Маленькие", from:0, to:1500},
