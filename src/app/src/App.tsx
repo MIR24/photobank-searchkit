@@ -84,6 +84,11 @@ export class App extends React.Component<any, any> {
                 {title:"Маленькие", from:0, to:1500},
                 {title:"Большие", from:1500, to:9000}
               ]}/>
+              <NumericRefinementListFilter id="alignment" title="Вертикальные/Горизонтальные" field="horizontal" options={[
+                {title:"Все"},
+                {title:"Вертикальные", from:0, to:1},
+                {title:"Горизонтальные", from:1, to:2}
+              ]}/>
               <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
       				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
       				<RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
