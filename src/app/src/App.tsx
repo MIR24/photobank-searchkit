@@ -77,14 +77,14 @@ export class App extends React.Component<any, any> {
       			<SideBar>
       				<HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
-              <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
-              <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
+              <RangeFilter min={500} max={6000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
+              <RangeFilter min={500} max={6000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <NumericRefinementListFilter id="smallBig" title="Размер" field="sizetype" options={[
                 {title:"Все"},
                 {title:"Маленькие", from:0, to:1500},
                 {title:"Большие", from:1500, to:9000}
               ]}/>
-              <NumericRefinementListFilter id="alignment" title="Вертикальные/Горизонтальные" field="horizontal" options={[
+              <NumericRefinementListFilter id="alignment" title="Отношение сторон" field="horizontal" options={[
                 {title:"Все"},
                 {title:"Вертикальные", from:0, to:1},
                 {title:"Горизонтальные", from:1, to:2}
