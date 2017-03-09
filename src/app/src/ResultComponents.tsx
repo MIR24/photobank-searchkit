@@ -5,12 +5,22 @@ export const MovieHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
+  let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} target="_blank">
-        <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster} width="240" height="240"/>
-        <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}>
-        </div>
+      <div >
+           <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster} width="240" height="240"/>
+           <div className="div-img-overlay" dangerouslySetInnerHTML={{__html:imgInfo}}></div>
+           <div className="container">
+            <div className="image-container">
+              <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
+              <div className="image-info">{imgInfo}</div>
+            </div>
+           </div>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
+         </div>
+       </div>
       </a>
     </div>
   )
