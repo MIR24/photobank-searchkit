@@ -10,8 +10,6 @@ export const MovieHitsGridItem = (props)=> {
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} target="_blank">
       <div >
-           <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster} width="240" height="240"/>
-           <div className="div-img-overlay" dangerouslySetInnerHTML={{__html:imgInfo}}></div>
            <div className="container">
             <div className="image-container">
               <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>

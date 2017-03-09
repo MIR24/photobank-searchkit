@@ -41,7 +41,7 @@ export class App extends React.Component<any, any> {
 
   constructor() {
     super()
-    const host = "/api/movies"
+    const host = "http://172.17.0.3:9200/movies"
     this.searchkit = new SearchkitManager(host)
     this.searchkit.translateFunction = (key)=> {
       return {
@@ -110,7 +110,7 @@ export class App extends React.Component<any, any> {
 
               <ViewSwitcherHits
       				    hitsPerPage={12} highlightFields={["title","plot"]}
-                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename"]}
+                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename", "exifimagelength", "exifimagewidth"]}
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
                     {key:"list", title:"Список", itemComponent:MovieHitsListItem}
