@@ -99,9 +99,6 @@ export class App extends React.Component<any, any> {
                 {title:"21 to 60", from:21, to:60},
                 {title:"60 or more", from:61, to:1000}
               ]}/>
-              <SortingSelector options={[
-                {label:"Сортировка по дате (ранняя дата - вначале)", field:"date_taken", order:"desc", defaultOption:true},
-              ]}/>
             </SideBar>
 
       			<LayoutResults>
