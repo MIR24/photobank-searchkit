@@ -112,6 +112,10 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+                  <SortingSelector  options={[
+                    {label:"Без сортировки", defaultOption:true},
+                    {label:"Сначала - новые", field:"date_taken", order:"desc"}
+                  ]}/>
 		  <PageSizeSelector options={[4,12,24]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
