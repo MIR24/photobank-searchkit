@@ -103,7 +103,7 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
-		  <PageSizeSelector options={[4,12,24]} listComponent={Toggle}/>
+		  <PageSizeSelector options={[25,50,100]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
                 <ActionBarRow>
@@ -114,7 +114,7 @@ export class App extends React.Component<any, any> {
               </ActionBar>
 
               <ViewSwitcherHits
-      				    hitsPerPage={12} highlightFields={["title","plot"]}
+      				    hitsPerPage={50} highlightFields={["title","plot"]}
                   sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "author","source","sourceUrl","short_url", "original_filename", "exifimagelength", "exifimagewidth"]}
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
