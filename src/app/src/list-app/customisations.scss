@@ -48,8 +48,9 @@
 }
 
 .div-title{
-  top: -30px;
-  margin-bottom: -30px;
+  top: -45px;
+  left: -10px;
+  margin-bottom: -50px;
   color: #08c;
   font: 15px Helvetica, Sans-Serif;
   position: relative;
@@ -85,4 +86,12 @@
   background: rgb(0,0,0); /* fallback color */
   background: rgba(0,0,0, 0.4);
   top: -60px;
+}
+
+.grid-custom {
+  padding: 0px 20px 0px 30px;
+}
+
+.grid-custom a {
+    text-decoration: none;
 }
