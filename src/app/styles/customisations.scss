@@ -49,9 +49,8 @@
 }
 
 .div-title{
-  top: -45px;
-  left: -10px;
-  margin-bottom: -50px;
+  top: -30px;
+  margin-bottom: -30px;
   color: #08c;
   font: 15px Helvetica, Sans-Serif;
   position: relative;
@@ -89,10 +88,7 @@
   top: -60px;
 }
 
-.grid-custom {
-  padding: 0px 20px 0px 30px;
-}
-
-.grid-custom a {
-    text-decoration: none;
+.sk-hits-grid__item {
+  margin-left: 25px;
+  margin-right: 25px;
 }
