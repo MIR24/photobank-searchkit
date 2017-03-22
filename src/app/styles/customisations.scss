@@ -49,6 +49,7 @@
 }
 
 .div-title{
+  margin-top: -30px;
   margin-bottom: -30px;
   color: #08c;
   font: 15px Helvetica, Sans-Serif;
@@ -78,7 +79,7 @@
 }
 
 .container .image-container .image-info {
-  z-index: 100;
+  z-index: 98;
   position: relative;
   color: white;
   font: bold 17px Helvetica, Sans-Serif;
