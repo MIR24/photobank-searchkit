@@ -67,7 +67,7 @@ export class App extends React.Component<any, any> {
             <div className="my-logo">МИР24 фотобанк</div>
             <SearchBox
               translations={{"searchbox.placeholder":"type at least 3 characters for image search"}}
-              queryOptions={{"minimum_should_match":"2<70%", "analyzer":"russian"}}
+              queryOptions={{"minimum_should_match":"70%"}}
               autofocus={true}
               searchOnChange={true}
               queryFields={["actors^1","type^2","languages","title^5", "genres^2", "plot", "author", "short_url", "original_filename"]}/>
