@@ -52,7 +52,10 @@ export class App extends React.Component<any, any> {
         "facets.view_more":"Показать больше",
         "facets.view_all":"Показать все",
         "facets.view_less":"Показать меньше",
-        "reset.clear_all":"Сбросить фильтры"
+        "reset.clear_all":"Сбросить фильтры",
+        "NoHits.DidYouMean":"Искать {suggestion}",
+        "NoHits.NoResultsFound":"Ничего не найдено для {query}.",
+        "NoHits.NoResultsFoundDidYouMean":"Ничего не найдено для {query}. Может быть {suggestion}?"
       }[key]
     }
   }
