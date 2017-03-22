@@ -10,8 +10,12 @@ export const MovieHitsGridItem = (props)=> {
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} onClick={(e)=>{e.preventDefault(); console.log("195.26.178.77/plugins/imageviewer/site/direct.php?s="+result._source.imdbId)}}>
         <div >
-          <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster} width="240" height="240"/>
-          <div className="div-img-overlay" dangerouslySetInnerHTML={{__html:imgInfo}}></div>
+          <div className="container">
+            <div className="image-container">
+              <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
+              <div className="image-info">{imgInfo}</div>
+            </div>
+          </div>
           <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
           </div>
         </div>

@@ -79,6 +79,11 @@ export class App extends React.Component<any, any> {
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
+                {title:"Все"},
+                {title:"Маленькие", from:0, to:1500},
+                {title:"Большие", from:1500, to:9000}
+              ]}/>
               <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
       				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
       				<RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
@@ -98,6 +103,10 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+                  <SortingSelector  options={[
+                    {label:"Без сортировки", defaultOption:true},
+                    {label:"Сначала - новые", field:"date_taken", order:"desc"}
+                  ]}/>
 		  <PageSizeSelector options={[4,12,24]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
