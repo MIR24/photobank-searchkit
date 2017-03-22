@@ -103,7 +103,13 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+
+                  <SortingSelector  options={[
+                    {label:"Без сортировки", defaultOption:true},
+                    {label:"Сначала - новые", field:"date_taken", order:"desc"}
+                  ]}/>
 		  <PageSizeSelector options={[25,50,100]} listComponent={Toggle}/>
+      
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
                 <ActionBarRow>
@@ -115,7 +121,7 @@ export class App extends React.Component<any, any> {
 
               <ViewSwitcherHits
       				    hitsPerPage={50} highlightFields={["title","plot"]}
-                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "author","source","sourceUrl","short_url", "original_filename", "exifimagelength", "exifimagewidth"]}
+                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "author","source","sourceUrl","short_url", "original_filename", "exifimagelength", "exifimagewidth", "date_taken"]}
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
                     {key:"list", title:"Список", itemComponent:MovieHitsListItem}
