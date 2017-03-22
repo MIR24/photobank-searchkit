@@ -79,6 +79,11 @@ export class App extends React.Component<any, any> {
               <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
               <RangeFilter min={1000} max={3000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
+              <NumericRefinementListFilter id="alignment" title="Вертикальные/Горизонтальные" field="horizontal" options={[
+                {title:"Все"},
+                {title:"Вертикальные", from:0, to:1},
+                {title:"Горизонтальные", from:1, to:2}
+              ]}/>
               <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
                 {title:"Все"},
                 {title:"Маленькие", from:0, to:1500},
@@ -103,6 +108,10 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+                  <SortingSelector  options={[
+                    {label:"Без сортировки", defaultOption:true},
+                    {label:"Сначала - новые", field:"date_taken", order:"desc"}
+                  ]}/>
 		  <PageSizeSelector options={[25,50,100]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
@@ -115,7 +124,7 @@ export class App extends React.Component<any, any> {
 
               <ViewSwitcherHits
       				    hitsPerPage={50} highlightFields={["title","plot"]}
-                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "author","source","sourceUrl","short_url", "original_filename", "exifimagelength", "exifimagewidth"]}
+                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "author","source","sourceUrl","short_url", "original_filename", "exifimagelength", "exifimagewidth", "date_taken"]}
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
                     {key:"list", title:"Список", itemComponent:MovieHitsListItem}
