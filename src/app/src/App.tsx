@@ -43,6 +43,15 @@ export class App extends React.Component<any, any> {
     super()
     const host = "http://195.26.178.77:9200/movies"
     this.searchkit = new SearchkitManager(host)
+
+    this.searchkit.setQueryProcessor((plainQueryObject)=>{
+      let text = this.searchkit.query.getQueryString();
+      let suggestions = {"phrase":{"field":"title","real_word_error_likelihood":0.95,"max_errors":1,"gram_size":4,"direct_generator":[{"field":"_all","suggest_mode":"always","min_word_length":1}]}};
+      plainQueryObject.suggest = {suggestions};
+      plainQueryObject.suggest.text = text;
+      return plainQueryObject
+    })
+
     this.searchkit.translateFunction = (key)=> {
       return {
         "pagination.next":"Следующая",
