@@ -98,8 +98,8 @@ export class App extends React.Component<any, any> {
               ]}/>
               <NumericRefinementListFilter id="smallBig" title="Маленькие/Большие" field="sizetype" options={[
                 {title:"Все"},
-                {title:"Маленькие", from:0, to:1500},
-                {title:"Большие", from:1500, to:9000}
+                {title:"Маленькие, до 1500px", from:0, to:1500},
+                {title:"Большие, свыше 1500px", from:1500, to:9000}
               ]}/>
               <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
       				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
