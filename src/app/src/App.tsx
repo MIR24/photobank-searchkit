@@ -94,8 +94,8 @@ export class App extends React.Component<any, any> {
               <RangeFilter min={500} max={6000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
               <NumericRefinementListFilter id="smallBig" title="Размер" field="sizetype" options={[
                 {title:"Все"},
-                {title:"Маленькие", from:0, to:1500},
-                {title:"Большие", from:1500, to:9000}
+                {title:"Маленькие, до 1500px", from:0, to:1500},
+                {title:"Большие, свыше 1500px", from:1500, to:9000}
               ]}/>
               <NumericRefinementListFilter id="alignment" title="Отношение сторон" field="horizontal" options={[
                 {title:"Все"},
