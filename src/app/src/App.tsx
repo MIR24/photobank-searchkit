@@ -41,7 +41,7 @@ export class App extends React.Component<any, any> {
 
   constructor() {
     super()
-    const host = "http://195.26.178.77:9200/movies"
+    const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
 
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
