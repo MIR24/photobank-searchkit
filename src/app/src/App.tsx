@@ -63,7 +63,8 @@ export class App extends React.Component<any, any> {
         "facets.view_less":"Показать меньше",
         "NoHits.DidYouMean":"Искать {suggestion}",
         "NoHits.NoResultsFound":"Ничего не найдено для {query}.",
-        "NoHits.NoResultsFoundDidYouMean":"Ничего не найдено для {query}. Может быть {suggestion}?"
+        "NoHits.NoResultsFoundDidYouMean":"Ничего не найдено для {query}. Может быть {suggestion}?",
+        "NoHits.SearchWithoutFilters":"Искать {query} без фильтров"
       }[key]
     }
   }
