@@ -56,7 +56,7 @@ export class App extends React.Component<any, any> {
       return {
         "pagination.next":"Следующая",
         "pagination.previous":"Предыдущая",
-        "searchbox.placeholder":"наберите не меньше трех знаков, чтобы начать поиск",
+        "searchbox.placeholder":"Поиск...",
         "hitstats.results_found":"{hitCount} найдено",
         "facets.view_more":"Показать больше",
         "facets.view_all":"Показать все",
