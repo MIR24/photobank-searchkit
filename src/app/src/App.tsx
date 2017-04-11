@@ -34,6 +34,35 @@ import "searchkit/theming/theme.scss";
 
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
 
+let thisSearchkit ;
+
+
+const NoHitsDisplay = (props) => {
+  const {bemBlocks, query, suggestion, noResultsLabel, resetFilters} = props
+  let divsToAdd = [];
+  if(!suggestion){
+    divsToAdd.push(React.createElement("div", {className: bemBlocks.container("steps"), key: 0},
+                    React.createElement("div", {className: bemBlocks.container("step-action"),
+                                        onClick: ()=>{thisSearchkit.getQueryAccessor().resetState(); thisSearchkit.performSearch(true);} },
+                                        "Сбросить поиск" )))
+  }
+  else{
+    for(let i=0; i<thisSearchkit.results.suggest.suggestions[0].options.length; i++){
+      divsToAdd.push(React.createElement("div", {className: bemBlocks.container("steps"), key: i},
+                      React.createElement("div", {className: bemBlocks.container("step-action"),
+                                          onClick: (e)=>{e.preventDefault();  thisSearchkit.getQueryAccessor().setQueryString(thisSearchkit.results.suggest.suggestions[0].options[i].text, true); thisSearchkit.performSearch(true);} },
+                                          "Искать "+thisSearchkit.results.suggest.suggestions[0].options[i].text )))
+    }
+  }
+  return (
+    <div data-qa="no-hits" className={bemBlocks.container()}>
+      <div className={bemBlocks.container("info")}>
+        {noResultsLabel}
+      </div>
+        {divsToAdd}
+    </div>
+  );
+}
 
 export class App extends React.Component<any, any> {
 
@@ -43,7 +72,8 @@ export class App extends React.Component<any, any> {
     super()
     const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
-
+    thisSearchkit = this.searchkit
+    
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
       let text = this.searchkit.query.getQueryString();
       let suggestions = {"phrase":{"field":"title","real_word_error_likelihood":0.95,"max_errors":1,"gram_size":4,"direct_generator":[{"field":"_all","suggest_mode":"always","min_word_length":1}]}};
@@ -145,7 +175,7 @@ export class App extends React.Component<any, any> {
                   scrollTo="body"
               />
 
-              <NoHits suggestionsField={"title"}/>
+              <NoHits component={NoHitsDisplay} suggestionsField={"title"}/>
               <InitialLoader/>
       				<Pagination showNumbers={true}/>
       			</LayoutResults>
