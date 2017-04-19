@@ -92,3 +92,14 @@
   margin-left: 25px;
   margin-right: 25px;
 }
+
+.sk-action-button, .sk-no-hits__step-action, .sk-range-input__submit {
+  border: none;
+  color: #08c;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+}
