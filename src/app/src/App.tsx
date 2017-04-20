@@ -41,12 +41,21 @@ const NoHitsDisplay = (props) => {
   const {bemBlocks, query, suggestion, noResultsLabel, resetFilters} = props
   let divsToAdd = [];
   if(!suggestion){
-    divsToAdd.push(React.createElement("div", {className: bemBlocks.container("steps"), key: 0},
-                    React.createElement("div", {className: bemBlocks.container("step-action"),
-                                        onClick: ()=>{thisSearchkit.getQueryAccessor().resetState(); thisSearchkit.performSearch(true);} },
-                                        "Сбросить поиск" )))
+    divsToAdd.push(React.createElement("div", {className: bemBlocks.container("info"), key: 9 },
+                      "Ничего не найдено для",
+                      React.createElement("span", {className: bemBlocks.container("em"), key: 1}, " "+query+".")),
+                      React.createElement("div", {className: bemBlocks.container("steps"), key: 8},
+                                      React.createElement("div", {className: bemBlocks.container("step-action"),
+                                                          onClick: ()=>{thisSearchkit.getQueryAccessor().resetState(); thisSearchkit.performSearch(true);} },
+                                                          "Сбросить поиск" )))
   }
   else{
+
+    divsToAdd.push(React.createElement("div", {className: bemBlocks.container("info"), key: 10 },
+                      "Ничего не найдено для",
+                      React.createElement("span", {className: bemBlocks.container("em"), key: 1}, " "+query+"."),
+                      React.createElement("span", {className: bemBlocks.container(), key: 2}, " Искать:")))
+
     for(let i=0; i<thisSearchkit.results.suggest.suggestions[0].options.length; i++){
       divsToAdd.push(React.createElement("div", {className: bemBlocks.container("steps"), key: i},
                       React.createElement("div", {className: bemBlocks.container("step-action"),
@@ -56,9 +65,6 @@ const NoHitsDisplay = (props) => {
   }
   return (
     <div data-qa="no-hits" className={bemBlocks.container()}>
-      <div className={bemBlocks.container("info")}>
-        Ничего не найдено для <em>{query}</em>. Искать:
-      </div>
         {divsToAdd}
     </div>
   );
