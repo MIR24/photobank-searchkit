@@ -8,7 +8,7 @@ export const MovieHitsGridItem = (props)=> {
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-      <a href={url} onClick={(e)=>{e.preventDefault(); window['cb'](result._source)}}>
+      <a href={url} onClick={(e)=>{e.preventDefault(); window['cb'](result)}}>
         <div >
           <div className="container">
             <div className="image-container">
