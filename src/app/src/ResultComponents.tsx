@@ -1,27 +1,109 @@
 import * as React from "react";
 import * as _ from "lodash";
 
+export var multiSelectList = [];
+
 export const MovieHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
-  return (
-    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-      <a href={url} onClick={(e)=>{e.preventDefault(); window['cb'](result)}}>
-        <div >
-          <div className="container">
-            <div className="image-container">
-              <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
-              <div className="image-info">{imgInfo}</div>
-              <div className="image-info">{result._source.date_taken}</div>
+
+
+  const MultiSelect = React.createClass({
+    getInitialState() {
+      var isInArray = false;
+      var objToAdd = {};
+      var isVisible = false;
+
+      multiSelectList.map(
+        function(name, index){
+          if(name.id == result._id){
+            isInArray = true;
+          }
+        })
+
+      return { childVisible: isInArray };
+    },
+
+    makeObjToSend(){
+      this.objToAdd = {
+          id: result._id,
+          source: source.source,
+          sourceurl: source.sourceurl,
+          date_taken: source.date_taken,
+          exifimagelength: source.exifimagelength,
+          exifimagewidth: source.exifimagewidth,
+          imdbId: source.imdbId,
+          plot: source.plot,
+          poster: source.poster,
+          title: source.title
+      }
+    },
+
+    appendMultiSelectList(e) {
+
+      if (!this.isInArray && !this.state.childVisible){
+        this.makeObjToSend();
+        multiSelectList.push(this.objToAdd);
+        this.isInArray = true;
+        this.setState({childVisible: !this.state.childVisible});
+      }
+      else
+      {
+        multiSelectList.map(
+          function(name, index){
+            if(name.id == result._id){
+              multiSelectList.splice(index,1);
+            }
+          })
+        this.objToAdd = {};
+        this.isInArray = false;
+        this.setState({childVisible: !this.state.childVisible});
+      }
+    },
+
+    sendOneItem() {
+      this.makeObjToSend();
+      multiSelectList.push(this.objToAdd);
+      window['cb'](multiSelectList)
+    },
+
+    render() {
+
+      return (
+        <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
+          <a href={url} onClick={(e)=>{ e.preventDefault();
+                                        if(window['multiSelectFlag'] == false)
+                                        { this.sendOneItem(); }
+                                        else
+                                        { this.appendMultiSelectList(); }
+                                      }}
+            >
+            <div className="container">
+              <div className="image-container">
+                <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
+                <div className="image-info">{imgInfo}</div>
+                <div className="image-info">{result._source.date_taken}</div>
+                {
+                  this.state.childVisible
+                  ? <div className="image-info">Selected</div>
+                  : null
+                }
+              </div>
             </div>
-          </div>
-          <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
-          </div>
+          </a>
+        <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}></div>
         </div>
-      </a>
-    </div>
+      );
+    }
+  });
+
+
+  return (
+
+    <MultiSelect />
+
   )
 }
 

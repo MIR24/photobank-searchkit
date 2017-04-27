@@ -33,6 +33,7 @@ import "./../styles/customisations.scss";
 import "searchkit/theming/theme.scss";
 
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
+import {multiSelectList} from "./ResultComponents"
 
 let thisSearchkit ;
 
@@ -157,6 +158,9 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+
+                  <button onClick={(e)=>{ window['cb'](multiSelectList) }}>Multi Select</button>
+
                   <SortingSelector  options={[
                     {label:"Без сортировки", defaultOption:true},
                     {label:"Сначала - новые", field:"date_taken", order:"desc"}
