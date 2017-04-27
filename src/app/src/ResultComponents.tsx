@@ -14,7 +14,6 @@ export const MovieHitsGridItem = (props)=> {
     getInitialState() {
       var isInArray = false;
       var objToAdd = {};
-      var isVisible = false;
 
       multiSelectList.map(
         function(name, index){
