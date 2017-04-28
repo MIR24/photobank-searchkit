@@ -88,6 +88,27 @@
   top: -40px;
 }
 
+.container .image-container .image-selected {
+  z-index: 98;
+  position: relative;
+  color: white;
+  font: bold 17px Helvetica, Sans-Serif;
+  background: gray;
+  top: -40px;
+}
+
+.multi-select-btn {
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .sk-hits-grid__item {
   margin-left: 25px;
   margin-right: 25px;

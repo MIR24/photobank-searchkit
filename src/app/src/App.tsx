@@ -159,7 +159,11 @@ export class App extends React.Component<any, any> {
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
 
-                  <button onClick={(e)=>{ window['cb'](multiSelectList) }}>Multi Select</button>
+                  {
+                    window['multiSelectFlag']
+                    ? <label className="multi-select-btn" onClick={(e)=>{ window['cb'](multiSelectList) }}>Multi Select</label>
+                    : null
+                  }
 
                   <SortingSelector  options={[
                     {label:"Без сортировки", defaultOption:true},

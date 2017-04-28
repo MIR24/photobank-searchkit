@@ -79,7 +79,7 @@ export const MovieHitsGridItem = (props)=> {
                 <div className="image-info">{result._source.date_taken}</div>
                 {
                   this.state.childVisible
-                  ? <div className="image-info">Selected</div>
+                  ? <div className="image-selected">Selected</div>
                   : null
                 }
               </div>
