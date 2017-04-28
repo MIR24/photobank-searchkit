@@ -15,6 +15,13 @@ export const MovieHitsGridItem = (props)=> {
       var isInArray = false;
       var objToAdd = {};
 
+      multiSelectList.map(
+        function(name, index){
+          if(name.id == result._id){
+            isInArray = true;
+          }
+        })
+
       return { childVisible: isInArray };
     },
 
