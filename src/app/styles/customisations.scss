@@ -71,6 +71,7 @@
     text-align: center;
     vertical-align: bottom;
     display: table-cell;
+    position: relative;
 }
 
 .container .image-container img {
@@ -89,12 +90,13 @@
 }
 
 .container .image-container .image-selected {
-  z-index: 98;
-  position: relative;
+  z-index: 99;
+  position: absolute;
   color: white;
   font: bold 17px Helvetica, Sans-Serif;
-  background: gray;
-  top: -40px;
+  color: #08c;
+  top: 0px;
+  right: 0px;
 }
 
 .multi-select-btn {

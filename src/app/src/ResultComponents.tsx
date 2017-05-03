@@ -11,18 +11,19 @@ export const MovieHitsGridItem = (props)=> {
 
 
   const MultiSelect = React.createClass({
+    isInArray : false,
+    objToAdd : {},
+
     getInitialState() {
-      var isInArray = false;
-      var objToAdd = {};
 
       multiSelectList.map(
         function(name, index){
           if(name.id == result._id){
-            isInArray = true;
+            this.isInArray = true;
           }
         })
 
-      return { childVisible: isInArray };
+      return { childVisible: this.isInArray };
     },
 
     makeObjToSend(){
@@ -86,7 +87,7 @@ export const MovieHitsGridItem = (props)=> {
                 <div className="image-info">{result._source.date_taken}</div>
                 {
                   this.state.childVisible
-                  ? <div className="image-selected">Selected</div>
+                  ? <div className="image-selected" dangerouslySetInnerHTML={{__html:"&#10004;"}}></div>
                   : null
                 }
               </div>
