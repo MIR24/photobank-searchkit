@@ -11,19 +11,19 @@ export const MovieHitsGridItem = (props)=> {
 
 
   const MultiSelect = React.createClass({
-    isInArray : false,
     objToAdd : {},
 
     getInitialState() {
+      var isInArray = false;
 
       multiSelectList.map(
         function(name, index){
           if(name.id == result._id){
-            this.isInArray = true;
+            isInArray = true;
           }
         })
 
-      return { childVisible: this.isInArray };
+      return { childVisible: isInArray };
     },
 
     makeObjToSend(){
