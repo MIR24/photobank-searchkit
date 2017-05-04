@@ -112,6 +112,19 @@
   white-space: nowrap;
 }
 
+.multi-select-btn:hover {
+  background-color: #08c;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .sk-hits-grid__item {
   margin-left: 25px;
   margin-right: 25px;
