@@ -161,7 +161,7 @@ export class App extends React.Component<any, any> {
 
                   {
                     window['multiSelectFlag']
-                    ? <label className="multi-select-btn" onClick={(e)=>{ window['cb'](multiSelectList) }}>Multi Select</label>
+                    ? <label className="multi-select-btn" onClick={(e)=>{ window['cb'](multiSelectList) }}>Вставить</label>
                     : null
                   }
 
