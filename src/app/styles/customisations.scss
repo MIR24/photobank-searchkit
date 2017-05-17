@@ -71,6 +71,7 @@
     text-align: center;
     vertical-align: bottom;
     display: table-cell;
+    position: relative;
 }
 
 .container .image-container img {
@@ -86,6 +87,42 @@
   background: rgb(0,0,0); /* fallback color */
   background: rgba(0,0,0, 0.7);
   top: -40px;
+}
+
+.container .image-container .image-selected {
+  z-index: 99;
+  position: absolute;
+  color: white;
+  font: bold 17px Helvetica, Sans-Serif;
+  color: #08c;
+  top: 0px;
+  right: 0px;
+}
+
+.multi-select-btn {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.multi-select-btn:hover {
+  background-color: #08c;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .sk-hits-grid__item {
