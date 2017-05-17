@@ -12,7 +12,6 @@ class MultiSelect extends React.Component<any, any> {
     multiSelectList.map(
       (name, index)=>{
         if(name.id == this.props.props.result._id){
-          console.log(isInArray);
           isInArray = true;
         }
       })
