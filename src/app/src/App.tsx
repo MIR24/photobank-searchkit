@@ -29,8 +29,8 @@ import {
   ActionBar, ActionBarRow
 } from "searchkit";
 
-import "./../styles/customisations.scss";
 import "searchkit/theming/theme.scss";
+import "./../styles/customisations.scss";
 
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
 import {multiSelectList} from "./ResultComponents"
