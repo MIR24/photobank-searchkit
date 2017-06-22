@@ -26,7 +26,7 @@ class MultiSelect extends React.Component<any, any> {
     this.state.objToAdd = {
       id: this.props.props.result._id,
       source: this.props.props.result._source.source,
-      sourceurl: this.props.props.result._source.sourceurl ? this.props.props.result._source.sourceurl : this.props.props.result._source.sourceUrl,
+      sourceUrl: this.props.props.result._source.sourceurl ? this.props.props.result._source.sourceurl : this.props.props.result._source.sourceUrl,
       date_taken: this.props.props.result._source.date_taken,
       exifimagelength: this.props.props.result._source.exifimagelength,
       exifimagewidth: this.props.props.result._source.exifimagewidth,
@@ -36,7 +36,7 @@ class MultiSelect extends React.Component<any, any> {
       title: this.props.props.result._source.title,
       author: this.props.props.result._source.author,
       oldTitle: this.props.props.result._source.oldtitle,
-      sourcetext: this.props.props.result._source.sourcetext 
+      sourceText: this.props.props.result._source.sourcetext 
     };
   }
 
