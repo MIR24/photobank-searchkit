@@ -35,6 +35,8 @@ class MultiSelect extends React.Component<any, any> {
       poster: this.props.props.result._source.poster,
       title: this.props.props.result._source.title,
       author: this.props.props.result._source.author
+      oldTitle: this.props.props.result._source.oldtitle,
+      sourcetext: this.props.props.result._source.sourcetext 
     };
   }
 
