@@ -6,3 +6,4 @@ npm-debug.log
 /images
 *.swp
 *.swo
+*.un~
