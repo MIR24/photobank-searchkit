@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -9,7 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/ftb/',
     css: 'styles.css'
   },
   resolve: {
@@ -23,7 +24,10 @@ module.exports = {
     root: path.join(__dirname, "node_modules")
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new HtmlWebpackPlugin({
+        title: 'МИР24 фотобанк',
+        hash: true
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin("styles.css", {allChunks:true}),
     new webpack.optimize.UglifyJsPlugin({
