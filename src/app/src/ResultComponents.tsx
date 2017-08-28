@@ -37,7 +37,8 @@ class MultiSelect extends React.Component<any, any> {
       title: this.props.props.result._source.title,
       author: this.props.props.result._source.author,
       oldTitle: this.props.props.result._source.oldtitle,
-      sourceText: this.props.props.result._source.sourcetext 
+      sourceText: this.props.props.result._source.sourcetext,
+      searchKitImgUrl: window.location.href
     };
   }
 
