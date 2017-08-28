@@ -79,7 +79,7 @@ export class App extends React.Component<any, any> {
     super()
     const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
-    thisSearchkit = this.searchkit
+    thisSearchkit = window['searchkit'] = this.searchkit;
 
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
       let text = this.searchkit.query.getQueryString();
@@ -104,8 +104,13 @@ export class App extends React.Component<any, any> {
         "NoHits.SearchWithoutFilters":"Искать {query} без фильтров"
       }[key]
     }
+    let query;
+    if (query=JSON.parse(localStorage.getItem('state'))) {
+      setTimeout(function () { //It's a CRAP!
+        thisSearchkit.searchFromUrlQuery(JSON.parse(localStorage.getItem('state')))
+      }, 1000);
+    }
   }
-
 
   render(){
 

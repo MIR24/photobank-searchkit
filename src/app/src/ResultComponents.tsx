@@ -23,6 +23,7 @@ class MultiSelect extends React.Component<any, any> {
   }
 
   makeObjToSend(){
+    localStorage.setItem('state', JSON.stringify(window['searchkit'].state));
     this.state.objToAdd = {
       id: this.props.props.result._id,
       source: this.props.props.result._source.source,
