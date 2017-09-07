@@ -117,7 +117,7 @@ export class App extends React.Component<any, any> {
   setLastUploadedFilter(){
     var toTemp = new Date();
     var fromTemp = new Date();
-    fromTemp.setDate(toTemp.getDate() - 5);
+    fromTemp.setDate(toTemp.getDate() - 7);
     
     this.state = {
       uploadedLastFilter : {
@@ -128,7 +128,7 @@ export class App extends React.Component<any, any> {
   }
   
   formatDate(date){
-    var dd = date.getDate();
+    var dd = date.getDate()+1;
     var mm = date.getMonth()+1;
     var yyyy = date.getFullYear();
     
