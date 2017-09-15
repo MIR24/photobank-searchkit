@@ -107,7 +107,8 @@ export class App extends React.Component<any, any> {
     let query;
     if (query=JSON.parse(localStorage.getItem('state'))) {
       setTimeout(function () { //It's a CRAP!
-        thisSearchkit.searchFromUrlQuery(JSON.parse(localStorage.getItem('state')))
+        localStorage.removeItem('state');
+        thisSearchkit.searchFromUrlQuery(query)
       }, 1000);
     }
   }
