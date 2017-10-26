@@ -122,13 +122,14 @@ export class App extends React.Component<any, any> {
     this.state = {
       uploadedLastFilter : {
         lastUploadedFrom: this.formatDate(fromTemp),
-        lastUploadedTo: this.formatDate(toTemp)
+        lastUploadedTo: this.formatDate(toTemp, true)
       }
     };
   }
   
-  formatDate(date){
-    var dd = date.getDate()+1;
+  formatDate(date, addOne = false){
+    var dd;
+    addOne ? dd = date.getDate()+1 : dd = date.getDate();
     var mm = date.getMonth()+1;
     var yyyy = date.getFullYear();
     
@@ -208,7 +209,7 @@ export class App extends React.Component<any, any> {
               </ActionBar>
 
               <div className="sk-layout__filters-row">
-                <NumericRefinementListFilter id="uploadedDateFilter" title="Период" listComponent={Tabs} field="datecreated" options={[
+                <NumericRefinementListFilter id="uploadedLastFilter" title="Период" listComponent={Tabs} field="datecreated" options={[
                   {title:"Все"},
                   {title:"Последние загруженные", from: this.state.uploadedLastFilter.lastUploadedFrom, to: this.state.uploadedLastFilter.lastUploadedTo}
                 ]}/>
