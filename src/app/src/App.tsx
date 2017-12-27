@@ -175,7 +175,7 @@ export class App extends React.Component<any, any> {
               <ViewSwitcherHits
                   hitsPerPage={50} highlightFields={["title", "keywords", "description"]}
 
-                  sourceFilter={["plot", "title", "keywords", "description","poster", "imdbId", "exifimagelength", "exifimagewidth", "date_taken"]}
+                  sourceFilter={["plot", "title", "keywords", "description", "poster", "imdbId", "exifimagelength", "exifimagewidth", "date_taken"]}
 
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
