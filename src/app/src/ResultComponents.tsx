@@ -8,7 +8,7 @@ export const MovieHitsGridItem = (props)=> {
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" onClick={(e)=>{ e.preventDefault();console.log(this); }}>
       <div >
            <div className="container">
             <div className="image-container">
@@ -17,7 +17,7 @@ export const MovieHitsGridItem = (props)=> {
               <div className="image-info">{result._source.date_taken}</div>
             </div>
            </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:[source.title, source.description, source.keywords].join(', ')}}>
          </div>
        </div>
       </a>

@@ -119,7 +119,7 @@ export class App extends React.Component<any, any> {
               queryOptions={{"minimum_should_match":"70%"}}
               autofocus={true}
               searchOnChange={true}
-              queryFields={["actors^1","type^2","languages","title^5", "genres^2", "plot", "author", "short_url", "original_filename"]}/>
+              queryFields={["keywords^12", "title^11", "description^10", "plot"]}/>
           </TopBar>
 
           <LayoutBody>
@@ -173,9 +173,9 @@ export class App extends React.Component<any, any> {
               </ActionBar>
 
               <ViewSwitcherHits
-      				    hitsPerPage={50} highlightFields={["title","plot"]}
+                  hitsPerPage={50} highlightFields={["title", "keywords", "description"]}
 
-                  sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year", "short_url", "original_filename","exifimagelength", "exifimagewidth", "date_taken"]}
+                  sourceFilter={["plot", "title", "keywords", "description","poster", "imdbId", "exifimagelength", "exifimagewidth", "date_taken"]}
 
                   hitComponents = {[
                     {key:"grid", title:"Плитка", itemComponent:MovieHitsGridItem, defaultOption:true},
