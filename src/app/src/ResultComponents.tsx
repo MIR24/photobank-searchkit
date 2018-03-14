@@ -17,7 +17,7 @@ export const MovieHitsGridItem = (props)=> {
               <div className="image-info">{result._source.date_taken}</div>
             </div>
            </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:[source.keywords, source.title, source.description].join(', ')}}>
          </div>
        </div>
       </a>
