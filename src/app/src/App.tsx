@@ -146,14 +146,6 @@ export class App extends React.Component<any, any> {
                 {title:"Большие, свыше 1500px", from:1500, to:9000}
               ]}/>
               <RefinementListFilter operator="OR" id="author" title="Автор" field="author.raw" size={10}/>
-      				<RefinementListFilter translations={{"facets.view_more":"View more writers"}} id="writers" title="Writers" field="writers.raw" operator="OR" size={10}/>
-      				<RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
-              <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
-                {title:"All"},
-                {title:"up to 20", from:0, to:20},
-                {title:"21 to 60", from:21, to:60},
-                {title:"60 or more", from:61, to:1000}
-              ]}/>
             </SideBar>
 
       			<LayoutResults>
