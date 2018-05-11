@@ -35,7 +35,8 @@ import "./../styles/customisations.scss";
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
 import {multiSelectList} from "./ResultComponents"
 
-let thisSearchkit ;
+let thisSearchkit,
+    whereToSearch = ["keywords^12"];;
 
 
 const NoHitsDisplay = (props) => {
@@ -80,12 +81,21 @@ export class App extends React.Component<any, any> {
     const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
     thisSearchkit = window['searchkit'] = this.searchkit;
-
+    this.state = {
+        whereToSearch: whereToSearch
+    };
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
       let text = this.searchkit.query.getQueryString();
       let suggestions = {"phrase":{"field":"title","real_word_error_likelihood":0.95,"max_errors":1,"gram_size":4,"direct_generator":[{"field":"_all","suggest_mode":"always","min_word_length":1}]}};
       plainQueryObject.suggest = {suggestions};
       plainQueryObject.suggest.text = text;
+      if (plainQueryObject.query) {
+          plainQueryObject.query.simple_query_string.fields = whereToSearch;
+      }
+      if (plainQueryObject.sort) {
+          plainQueryObject.track_scores = true;
+          plainQueryObject.sort.push({ "_score": { "order": "desc" }});
+      }
       return plainQueryObject
     })
 
@@ -113,6 +123,16 @@ export class App extends React.Component<any, any> {
     }
   }
 
+  selectChange (event) {
+    whereToSearch = event.currentTarget.value.split(',');
+    this.setState({
+        whereToSearch: whereToSearch
+    });
+    if (thisSearchkit) {
+        thisSearchkit.performSearch(true);
+    }
+  }
+
   render(){
 
     return (
@@ -125,7 +145,7 @@ export class App extends React.Component<any, any> {
               queryOptions={{"minimum_should_match":"70%"}}
               autofocus={true}
               searchOnChange={true}
-              queryFields={["keywords^12", "title^11", "description^10", "plot"]}/>
+              queryFields={whereToSearch}/>
           </TopBar>
 
           <LayoutBody>
@@ -170,10 +190,17 @@ export class App extends React.Component<any, any> {
                     ? <label className="multi-select-btn" onClick={(e)=>{ window['cb'](multiSelectList) }}>Вставить</label>
                     : null
                   }
-
+                  <div className="sk-select">
+                    <select onChange={ e => this.selectChange(e) } value={ this.state.selectedValue }>
+                      <option value="keywords^12">Поиск по ключевым словам</option>
+                      <option value="title^11">Поиск по названию</option>
+                      <option value="description^10">Поиск по описанию</option>
+                      <option value="keywords^12,title^11,description^10,plot">Поиск везде</option>
+                    </select>
+                  </div>
                   <SortingSelector  options={[
-                    {label:"Без сортировки", defaultOption:true},
-                    {label:"Сначала - новые", field:"date_taken", order:"desc"}
+                    {label:"Без сортировки"},
+                    {label:"Сначала - новые", field:"date_taken", order:"desc", defaultOption:true}
                   ]}/>
 		  <PageSizeSelector options={[25,50,100]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
