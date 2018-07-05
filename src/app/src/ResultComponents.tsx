@@ -8,21 +8,6 @@ export const MovieHitsGridItem = (props)=> {
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
-  let imgText= '';
-  let word;
-  if (result.highlight) {
-      for (let index in result.highlight) {
-          do {
-              word = regexHighlight.exec(source.keywords);
-              if (word) {
-                  imgText += word[1] + ','
-              }
-          } while (word);
-      }
-  }
-  if (!imgText) {
-      imgText = source.keywords;
-  }
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit" title={source.description}>
       <a href={url} target="_blank">
@@ -34,7 +19,7 @@ export const MovieHitsGridItem = (props)=> {
               <div className="image-info">{result._source.date_taken}</div>
             </div>
            </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:imgText}}>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:result.highlight.keywords}}>
          </div>
        </div>
       </a>
