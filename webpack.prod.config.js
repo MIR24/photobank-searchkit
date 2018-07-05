@@ -9,10 +9,11 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle-[chunkhash].js',
     publicPath: '/ftb/',
     css: 'styles.css'
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
       react: path.resolve('./node_modules/react')
@@ -25,11 +26,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        title: 'МИР24 фотобанк',
-        hash: true
+        template: 'server/views/index.ejs',
+        inject: 'body'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new ExtractTextPlugin("styles.css", {allChunks:true}),
+    new ExtractTextPlugin("styles-[contenthash].css", {allChunks:true}),
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
         except: ['require', 'export', '$super']

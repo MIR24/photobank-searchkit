@@ -90,7 +90,7 @@ class MultiSelect extends React.Component<any, any> {
             </div>
           </div>
         </a>
-      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:this.props.props.result._source.title}}></div>
+      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:[this.props.source.keywords, this.props.source.title, this.props.source.description].join(', ')}}></div>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export const MovieHitsGridItem = (props)=> {
 
   return (
 
-    <MultiSelect props = {props} imgInfo = {imgInfo} url = {url}  />
+    <MultiSelect props = {props} imgInfo = {imgInfo} url = {url} source = {source} />
 
   )
 }
