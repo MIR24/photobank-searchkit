@@ -1,13 +1,30 @@
 import * as React from "react";
 import * as _ from "lodash";
 
+let regexHighlight = /<em>(.*?)<\/em>/g;
+
 export const MovieHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
+  let imgText= '';
+  let word;
+  if (result.highlight) {
+      for (let index in result.highlight) {
+          do {
+              word = regexHighlight.exec(source.keywords);
+              if (word) {
+                  imgText += word[1] + ','
+              }
+          } while (word);
+      }
+  }
+  if (!imgText) {
+      imgText = source.keywords;
+  }
   return (
-    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
+    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit" title={source.description}>
       <a href={url} target="_blank">
       <div >
            <div className="container">
@@ -17,7 +34,7 @@ export const MovieHitsGridItem = (props)=> {
               <div className="image-info">{result._source.date_taken}</div>
             </div>
            </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.title}}>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:imgText}}>
          </div>
        </div>
       </a>
