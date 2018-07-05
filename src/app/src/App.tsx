@@ -91,6 +91,7 @@ export class App extends React.Component<any, any> {
       plainQueryObject.suggest.text = text;
       if (plainQueryObject.query) {
           plainQueryObject.query.simple_query_string.fields = whereToSearch;
+          plainQueryObject.query.simple_query_string.query = plainQueryObject.query.simple_query_string.query.replace(/\s+/g, '+');
       }
       if (plainQueryObject.sort) {
           plainQueryObject.track_scores = true;
