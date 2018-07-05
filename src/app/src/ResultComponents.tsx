@@ -91,7 +91,7 @@ class MultiSelect extends React.Component<any, any> {
             </div>
           </div>
         </a>
-      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:this.props.imgText}}></div>
+      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:this.props.result.highlight.keywords}}></div>
       </div>
     );
   }
@@ -102,25 +102,10 @@ export const MovieHitsGridItem = (props)=> {
   let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
-  let imgText = '';
-  let word;
-  if (result.highlight) {
-      for (let index in result.highlight) {
-          do {
-              word = regexHighlight.exec(source.keywords);
-              if (word) {
-                  imgText += word[1] + ','
-              }
-          } while (word);
-      }
-  }
-  if (!imgText) {
-      imgText = source.keywords;
-  }
 
   return (
 
-    <MultiSelect props = {props} imgInfo = {imgInfo} url = {url} source = {source} imgText = { imgText }/>
+    <MultiSelect props = {props} imgInfo = {imgInfo} url = {url} source = {source} />
 
   )
 }
