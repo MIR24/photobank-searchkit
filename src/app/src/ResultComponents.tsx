@@ -19,7 +19,7 @@ export const MovieHitsGridItem = (props)=> {
               <div className="image-info">{result._source.date_taken}</div>
             </div>
            </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:result.highlight.keywords}}>
+         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.keywords}}>
          </div>
        </div>
       </a>
