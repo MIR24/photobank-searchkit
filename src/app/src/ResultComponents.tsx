@@ -91,7 +91,7 @@ class MultiSelect extends React.Component<any, any> {
             </div>
           </div>
         </a>
-      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:this.props.result.highlight.keywords}}></div>
+      <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:this.props.source.keywords}}></div>
       </div>
     );
   }
