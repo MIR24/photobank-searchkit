@@ -81,11 +81,10 @@ export class App extends React.Component<any, any> {
     const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
     thisSearchkit = window['searchkit'] = this.searchkit;
-    
-    this.setLastUploadedFilter();
 
     this.state = {
-        whereToSearch: whereToSearch
+        whereToSearch: whereToSearch,
+        uploadedLastFilter: this.setLastUploadedFilter(),
     };
 
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
@@ -133,12 +132,10 @@ export class App extends React.Component<any, any> {
     var fromTemp = new Date();
     fromTemp.setDate(toTemp.getDate() - 7);
     
-    this.state = {
-      uploadedLastFilter : {
+    return {
         lastUploadedFrom: this.formatDate(fromTemp),
         lastUploadedTo: this.formatDate(toTemp, true)
-      }
-    };
+    }
   }
   
   formatDate(date, addOne = false){
@@ -232,7 +229,7 @@ export class App extends React.Component<any, any> {
               </ActionBar>
 
               <div className="sk-layout__filters-row">
-                <NumericRefinementListFilter id="uploadedLastFilter" title="Период" listComponent={Tabs} field="datecreated" options={[
+                <NumericRefinementListFilter id="uploadedLastFilter" title="Период" listComponent={Tabs} field="date_created" options={[
                   {title:"Все"},
                   {title:"Последние загруженные", from: this.state.uploadedLastFilter.lastUploadedFrom, to: this.state.uploadedLastFilter.lastUploadedTo}
                 ]}/>
