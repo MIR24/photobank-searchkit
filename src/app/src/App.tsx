@@ -26,7 +26,7 @@ import {
   ViewSwitcherHits,
   Layout, LayoutBody, LayoutResults,
   SideBar, TopBar,
-  ActionBar, ActionBarRow
+  ActionBar, ActionBarRow, Tabs
 } from "searchkit";
 
 import "searchkit/theming/theme.scss";
@@ -81,9 +81,13 @@ export class App extends React.Component<any, any> {
     const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
     thisSearchkit = window['searchkit'] = this.searchkit;
+    
+    this.setLastUploadedFilter();
+
     this.state = {
         whereToSearch: whereToSearch
     };
+
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
       let text = this.searchkit.query.getQueryString();
       let suggestions = {"phrase":{"field":"title","real_word_error_likelihood":0.95,"max_errors":1,"gram_size":4,"direct_generator":[{"field":"_all","suggest_mode":"always","min_word_length":1}]}};
@@ -122,6 +126,28 @@ export class App extends React.Component<any, any> {
         thisSearchkit.searchFromUrlQuery(query)
       }, 1000);
     }
+  }
+  
+  setLastUploadedFilter(){
+    var toTemp = new Date();
+    var fromTemp = new Date();
+    fromTemp.setDate(toTemp.getDate() - 7);
+    
+    this.state = {
+      uploadedLastFilter : {
+        lastUploadedFrom: this.formatDate(fromTemp),
+        lastUploadedTo: this.formatDate(toTemp, true)
+      }
+    };
+  }
+  
+  formatDate(date, addOne = false){
+    var dd;
+    addOne ? dd = date.getDate()+1 : dd = date.getDate();
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear();
+    
+    return dd+'/'+mm+'/'+yyyy;
   }
 
   selectChange (event) {
@@ -212,6 +238,13 @@ export class App extends React.Component<any, any> {
                 </ActionBarRow>
 
               </ActionBar>
+
+              <div className="sk-layout__filters-row">
+                <NumericRefinementListFilter id="uploadedLastFilter" title="Период" listComponent={Tabs} field="datecreated" options={[
+                  {title:"Все"},
+                  {title:"Последние загруженные", from: this.state.uploadedLastFilter.lastUploadedFrom, to: this.state.uploadedLastFilter.lastUploadedTo}
+                ]}/>
+              </div>
 
               <ViewSwitcherHits
                   hitsPerPage={50} highlightFields={["title", "keywords", "description"]}
