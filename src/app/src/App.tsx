@@ -26,7 +26,7 @@ import {
   ViewSwitcherHits,
   Layout, LayoutBody, LayoutResults,
   SideBar, TopBar,
-  ActionBar, ActionBarRow
+  ActionBar, ActionBarRow, Tabs
 } from "searchkit";
 
 import "searchkit/theming/theme.scss";
@@ -80,6 +80,9 @@ export class App extends React.Component<any, any> {
     const host = "/api/movies"
     this.searchkit = new SearchkitManager(host)
     thisSearchkit = this.searchkit
+    
+    this.setLastUploadedFilter();
+
     this.state = {
         whereToSearch: whereToSearch
     };
@@ -116,6 +119,28 @@ export class App extends React.Component<any, any> {
         "NoHits.SearchWithoutFilters":"Искать {query} без фильтров"
       }[key]
     }
+  }
+
+  setLastUploadedFilter(){
+    var toTemp = new Date();
+    var fromTemp = new Date();
+    fromTemp.setDate(toTemp.getDate() - 7);
+    
+    this.state = {
+      uploadedLastFilter : {
+        lastUploadedFrom: this.formatDate(fromTemp),
+        lastUploadedTo: this.formatDate(toTemp, true)
+      }
+    };
+  }
+  
+  formatDate(date, addOne = false){
+    var dd;
+    addOne ? dd = date.getDate()+1 : dd = date.getDate();
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear();
+    
+    return dd+'/'+mm+'/'+yyyy;
   }
 
   selectChange (event) {
@@ -200,6 +225,13 @@ export class App extends React.Component<any, any> {
                 </ActionBarRow>
 
               </ActionBar>
+
+              <div className="sk-layout__filters-row">
+                <NumericRefinementListFilter id="uploadedLastFilter" title="Период" listComponent={Tabs} field="datecreated" options={[
+                  {title:"Все"},
+                  {title:"Последние загруженные", from: this.state.uploadedLastFilter.lastUploadedFrom, to: this.state.uploadedLastFilter.lastUploadedTo}
+                ]}/>
+              </div>
 
               <ViewSwitcherHits
                   hitsPerPage={50} highlightFields={["title", "keywords", "description"]}
