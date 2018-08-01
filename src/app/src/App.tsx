@@ -126,14 +126,14 @@ export class App extends React.Component<any, any> {
     fromTemp.setDate(toTemp.getDate() - 7);
 
     return {
-        lastUploadedFrom: this.formatDate(fromTemp),
-        lastUploadedTo: this.formatDate(toTemp, true)
+        lastUploadedFrom: this.formatDate(fromTemp, 0),
+        lastUploadedTo: this.formatDate(toTemp, 1)
     }
   }
   
-  formatDate(date, addOne = false){
-    var dd;
-    addOne ? dd = date.getDate()+1 : dd = date.getDate();
+  formatDate(date, days){
+    date.setDate(date.getDate() + days);
+    var dd = date.getDate();
     var mm = date.getMonth()+1;
     var yyyy = date.getFullYear();
     
