@@ -2,6 +2,9 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var commitHash = require('child_process')
+  .execSync('git rev-parse --abbrev-ref HEAD; git rev-parse --short HEAD;')
+  .toString();
 
 module.exports = {
   entry: [
@@ -27,7 +30,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
         template: 'server/views/index.ejs',
-        inject: 'body'
+        inject: 'body',
+        gitInfo: commitHash
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin("styles-[contenthash].css", {allChunks:true}),
