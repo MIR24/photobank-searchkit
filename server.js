@@ -76,7 +76,7 @@ module.exports = {
 
 
     app.get('*', function(req, res) {
-      res.render('index');
+      res.render('index', { gitInfo: config.gitInfo });
     });
 
     app.listen(port, function () {
