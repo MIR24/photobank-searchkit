@@ -77,7 +77,7 @@ export class App extends React.Component<any, any> {
 
   constructor() {
     super()
-    const host = "/api/movies"
+    const host = "https://elastic.mir24.tv/movies"
     this.searchkit = new SearchkitManager(host)
     thisSearchkit = this.searchkit
     
