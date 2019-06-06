@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as _ from "lodash";
 const BEMBlock = require("bem-cn")
+import { ELASTIC_HOST } from './config';
 
 import {
   SearchBox,
@@ -77,8 +78,7 @@ export class App extends React.Component<any, any> {
 
   constructor() {
     super()
-    const host = "https://elastic.mir24.tv/movies"
-    this.searchkit = new SearchkitManager(host)
+    this.searchkit = new SearchkitManager(ELASTIC_HOST)
     thisSearchkit = this.searchkit
     
     this.state = {
