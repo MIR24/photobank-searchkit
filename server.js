@@ -7,6 +7,7 @@ var compression = require("compression")
 var _ = require("lodash")
 var cors = require('cors')
 var SearchkitExpress = require("searchkit-express")
+var dotenv = require('dotenv').config()
 
 module.exports = {
   start: function(prodMode) {
@@ -76,7 +77,10 @@ module.exports = {
 
 
     app.get('*', function(req, res) {
-      res.render('index', { gitInfo: config.gitInfo });
+      res.render('index', {
+        gitInfo: config.gitInfo,
+        elasticHost: dotenv.parsed.ELASTIC_HOST + dotenv.parsed.ELASTIC_API,
+      });
     });
 
     app.listen(port, function () {
