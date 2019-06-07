@@ -80,6 +80,7 @@ module.exports = {
       res.render('index', {
         gitInfo: config.gitInfo,
         elasticHost: dotenv.parsed.ELASTIC_HOST + dotenv.parsed.ELASTIC_API,
+        photobankBackendHost: dotenv.parsed.PHOTOBANK_BACKEND_HOST,
       });
     });
 
