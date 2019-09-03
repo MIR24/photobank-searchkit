@@ -1,31 +1,25 @@
 import * as React from "react";
+
 import * as _ from "lodash";
+
+import ImageBox from './Components/ImageBox';
 
 import { PHOTOBANK_BACKEND_HOST } from './config';
 
-let regexHighlight = /<em>(.*?)<\/em>/g;
-
 export const MovieHitsGridItem = (props)=> {
-  const {bemBlocks, result} = props
+  const { bemBlocks, result } = props
   let url = PHOTOBANK_BACKEND_HOST + "/" + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
+
   return (
-    <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit" title={source.description}>
-      <a href={url} target="_blank">
-      <div >
-           <div className="container">
-            <div className="image-container">
-              <img data-qa="poster" className={bemBlocks.item("poster")} src={result._source.poster}/>
-              <div className="image-info">{imgInfo}</div>
-              <div className="image-info">{result._source.date_taken}</div>
-            </div>
-           </div>
-         <div data-qa="title" className="div-title" dangerouslySetInnerHTML={{__html:source.keywords}}>
-         </div>
-       </div>
-      </a>
-    </div>
+    <ImageBox
+      bemBlocks={bemBlocks}
+      result={result}
+      imgInfo={imgInfo}
+      url={url}
+      source={source}
+    />
   )
 }
 

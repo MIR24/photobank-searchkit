@@ -81,6 +81,9 @@ module.exports = {
         gitInfo: config.gitInfo,
         elasticHost: dotenv.parsed.ELASTIC_HOST + dotenv.parsed.ELASTIC_API,
         photobankBackendHost: dotenv.parsed.PHOTOBANK_BACKEND_HOST,
+        photobankBackendHostApi: dotenv.parsed.PHOTOBANK_BACKEND_HOST_API,
+        photobankBackendUser: dotenv.parsed.PHOTOBANK_BACKEND_ADMIN_USER,
+        photobankBackendUserApiKey: dotenv.parsed.PHOTOBANK_BACKEND_ADMIN_KEY,
       });
     });
 
