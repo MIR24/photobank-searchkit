@@ -3,6 +3,8 @@ import * as _ from "lodash";
 const BEMBlock = require("bem-cn")
 import { ELASTIC_HOST } from './config';
 
+import CustomDialog from './Components/CustomDialog';
+
 import {
   SearchBox,
   Hits,
@@ -34,7 +36,8 @@ import "searchkit/theming/theme.scss";
 import "./../styles/customisations.scss";
 
 import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
-
+import { deletedFilesIds } from "./Components/ImageBox";
+import { deleteFile } from './Requests/PhotobankApi';
 
 let thisSearchkit,
     whereToSearch = ["keywords^12"];
@@ -84,6 +87,8 @@ export class App extends React.Component<any, any> {
     this.state = {
         whereToSearch: whereToSearch,
         uploadedLastFilter: this.setLastUploadedFilter(),
+        openConformation: false,
+        openInfo: false,
     };
 
     this.searchkit.setQueryProcessor((plainQueryObject)=>{
@@ -149,6 +154,44 @@ export class App extends React.Component<any, any> {
         thisSearchkit.performSearch(true);
     }
   }
+  checkDeleting = () => {
+    var hasItemsToDelete = false;
+    for (var id in deletedFilesIds) {
+      if (deletedFilesIds[id].check == false) {
+        hasItemsToDelete = true;
+        break;
+      }
+    }
+
+    if (hasItemsToDelete) {
+      this.toggleOpen('openConformation');
+    } else {
+      this.toggleOpen('openInfo');
+    }
+  }
+
+  toggleOpen = (type) => {
+    this.setState({
+      [type]: !this.state[type]
+    })
+  }
+
+  deleteFiles = () => {
+    for (var id in deletedFilesIds) {
+      if (deletedFilesIds[id].check == false) {
+        deleteFile(id)
+        .then(res => {
+          deletedFilesIds[id].action();
+          deletedFilesIds[id].check = true;
+          console.log('Фотография удалена', res);
+        })
+        .catch(err => {
+          console.error('Ошибка удаления', err);
+        });
+      }
+    }
+    this.toggleOpen('openConformation');
+  }
 
   render(){
 
@@ -193,6 +236,7 @@ export class App extends React.Component<any, any> {
           				<HitsStats translations={{
                     "hitstats.results_found":"{hitCount} results found"
                   }}/>
+                <label className="delete-btn" onClick={this.checkDeleting}>Удалить</label>
                 <div className="sk-select">
                     <select onChange={ e => this.selectChange(e) } value={ this.state.selectedValue }>
                         <option value="keywords^12">Поиск по ключевым словам</option>
@@ -240,6 +284,21 @@ export class App extends React.Component<any, any> {
       			</LayoutResults>
           </LayoutBody>
     			<a className="view-src-link" href="https://github.com/searchkit/searchkit-demo/blob/master/src/app/src/App.tsx">View source »</a>
+          <CustomDialog
+            open={this.state.openConformation}
+            title='Вы уверены, что хотите удалить выбранные фотографии?'
+            actions={[
+              <label key="cancel-btn" className="delete-btn mc-action-btn-spacing" onClick={this.toggleOpen.bind(this, 'openConformation')}>Нет</label>,
+              <label key="delete-btn" className="success-btn" onClick={this.deleteFiles}>Да</label>
+            ]}
+          />
+          <CustomDialog
+            open={this.state.openInfo}
+            title='Не выбраны фотографии для удаления!'
+            actions={[
+              <label key="ok-btn" className="multi-select-btn mc-action-btn-spacing" onClick={this.toggleOpen.bind(this, 'openInfo')}>Oк</label>,
+            ]}
+          />
     		</Layout>
       </SearchkitProvider>
 	)}
