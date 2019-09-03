@@ -1,8 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var commitHash = require('child_process')
+  .execSync('git rev-parse --abbrev-ref HEAD; git rev-parse --short HEAD;')
+  .toString();
 
 module.exports = {
+  gitInfo: commitHash,
   devtool:"eval",
   entry: [
     'webpack-hot-middleware/client?reload=true',
