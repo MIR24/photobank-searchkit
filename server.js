@@ -7,6 +7,7 @@ var compression = require("compression")
 var _ = require("lodash")
 var cors = require('cors')
 var SearchkitExpress = require("searchkit-express")
+var dotenv = require('dotenv').config()
 
 module.exports = {
   start: function(prodMode) {
@@ -76,7 +77,14 @@ module.exports = {
 
 
     app.get('*', function(req, res) {
-      res.render('index');
+      res.render('index', {
+        gitInfo: config.gitInfo,
+        elasticHost: dotenv.parsed.ELASTIC_HOST + dotenv.parsed.ELASTIC_API,
+        photobankBackendHost: dotenv.parsed.PHOTOBANK_BACKEND_HOST,
+        photobankBackendHostApi: dotenv.parsed.PHOTOBANK_BACKEND_HOST_API,
+        photobankBackendUser: dotenv.parsed.PHOTOBANK_BACKEND_ADMIN_USER,
+        photobankBackendUserApiKey: dotenv.parsed.PHOTOBANK_BACKEND_ADMIN_KEY,
+      });
     });
 
     app.listen(port, function () {
