@@ -37,7 +37,7 @@ import {MovieHitsGridItem, MovieHitsListItem} from "./ResultComponents"
 
 
 let thisSearchkit,
-    whereToSearch = ["keywords^12"];
+    whereToSearch = ["keywords", "title", "description"];
 
 
 const NoHitsDisplay = (props) => {
@@ -92,13 +92,23 @@ export class App extends React.Component<any, any> {
       plainQueryObject.suggest = {suggestions};
       plainQueryObject.suggest.text = text;
       if (plainQueryObject.query) {
-          plainQueryObject.query.simple_query_string.fields = whereToSearch;
-          plainQueryObject.query.simple_query_string.query = plainQueryObject.query.simple_query_string.query.replace(/\s+/g, '+');
+            plainQueryObject.query = {
+                "bool" : {
+                    "must": {
+                        "simple_query_string" : {
+                            "fields": whereToSearch,
+                            "query": plainQueryObject.query.simple_query_string.query.replace(/\s+/g, '+')
+                        }
+                    },
+                    "must_not" : {
+                        "terms" : {
+                            "_id" : []
+                        }
+                    }
+                }
+            }
       }
-      if (plainQueryObject.sort) {
-          plainQueryObject.track_scores = true;
-          plainQueryObject.sort.push({ "_score": { "order": "desc" }});
-      }
+      plainQueryObject.sort = { "date_taken": { "order": "desc" }};
       return plainQueryObject
     })
 
@@ -168,8 +178,6 @@ export class App extends React.Component<any, any> {
           <LayoutBody>
 
       			<SideBar>
-      				<HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
-              <RangeFilter min={0} max={100} field="metaScore" id="metascore" title="Metascore" showHistogram={true}/>
               <RangeFilter min={500} max={6000} field="exifimagelength" id="exifimagelength" title="Высота изображения" showHistogram={true}/>
               <RangeFilter min={500} max={6000} field="exifimagewidth" id="exifimagewidth" title="Ширина изображения" showHistogram={true}/>
               <NumericRefinementListFilter id="smallBig" title="Размер" field="sizetype" options={[
@@ -195,16 +203,13 @@ export class App extends React.Component<any, any> {
                   }}/>
                 <div className="sk-select">
                     <select onChange={ e => this.selectChange(e) } value={ this.state.selectedValue }>
-                        <option value="keywords^12">Поиск по ключевым словам</option>
-                        <option value="title^11">Поиск по названию</option>
-                        <option value="description^10">Поиск по описанию</option>
-                        <option value="keywords^12,title^11,description^10,plot">Поиск везде</option>
+                        <option value="keywords,title,description,plot">Поиск везде</option>
+                        <option value="keywords">Поиск по ключевым словам</option>
+                        <option value="title">Поиск по названию</option>
+                        <option value="description">Поиск по описанию</option>
                     </select>
                 </div>
-                  <SortingSelector  options={[
-                    {label:"Без сортировки"},
-                    {label:"Сначала - новые", field:"date_taken", order:"desc", defaultOption:true}
-                  ]}/>
+
 		  <PageSizeSelector options={[25,50,100]} listComponent={Toggle}/>
 			  <ViewSwitcherToggle/>
                 </ActionBarRow>
