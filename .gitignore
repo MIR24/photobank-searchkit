@@ -7,3 +7,6 @@ npm-debug.log
 *.swp
 *.swo
 *.un~
+.env
+dist
+package-lock.json

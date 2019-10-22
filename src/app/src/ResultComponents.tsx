@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as _ from "lodash";
 
+import { PHOTOBANK_BACKEND_HOST } from './config';
+
 export var multiSelectList = [];
 let regexHighlight = /<em>(.*?)<\/em>/g;
 
@@ -99,7 +101,7 @@ class MultiSelect extends React.Component<any, any> {
 
 export const MovieHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
-  let url = "https://photo.mir24.tv/" + result._source.imdbId+ "/" + result._source.plot
+  let url = PHOTOBANK_BACKEND_HOST + result._source.imdbId+ "/" + result._source.plot
   const source:any = _.extend({}, result._source, result.highlight)
   let imgInfo = source.exifimagewidth + ' x ' + source.exifimagelength;
 
