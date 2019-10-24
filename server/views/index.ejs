@@ -8,6 +8,10 @@
 <body>
 	<div id='root'>
 	</div>
+	<div id="config" class="hidden">
+		<span id="elasticHost"><%= htmlWebpackPlugin.options.elasticHost %></span>
+		<span id="photobankBackendHost"><%= htmlWebpackPlugin.options.photobankBackendHost %></span>
+	</div>
 	<span class="gitInfo"><%= htmlWebpackPlugin.options.gitInfo %></span>
 </body>
 

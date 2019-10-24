@@ -5,6 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var commitHash = require('child_process')
   .execSync('git rev-parse --abbrev-ref HEAD; git rev-parse --short HEAD;')
   .toString();
+var dotenv = require('dotenv').config();
 
 module.exports = {
   entry: [
@@ -31,7 +32,9 @@ module.exports = {
     new HtmlWebpackPlugin({
         template: 'server/views/index.ejs',
         inject: 'body',
-        gitInfo: commitHash
+        gitInfo: commitHash,
+        elasticHost: dotenv.parsed.ELASTIC_HOST + dotenv.parsed.ELASTIC_API,
+        photobankBackendHost: dotenv.parsed.PHOTOBANK_BACKEND_HOST,
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin("styles-[contenthash].css", {allChunks:true}),
